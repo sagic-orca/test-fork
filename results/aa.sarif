@@ -1,0 +1,98 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Orca Shift-Left Security",
+          "version": "OrcaScanCli/testing",
+          "rules": [
+            {
+              "id": "java.spring.security.injection.tainted-file-path.tainted-file-path",
+              "name": "User Input Can Control File Paths Leading to Directory Traversal",
+              "shortDescription": {
+                "text": "User Input Can Control File Paths Leading to Directory Traversal"
+              },
+              "fullDescription": {
+                "text": "Detected user input controlling a file path. An attacker could control the location of this file, to include going backwards in the directory with '../'. To address this, ensure that user-controlled variables in file paths are sanitized. You may also consider using a utility method such as org.apache.commons.io.FilenameUtils.getName(...) to only retrieve the file name from the path."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "**Details**: Detected user input controlling a file path. An attacker could control the location of this file, to include going backwards in the directory with '../'. To address this, ensure that user-controlled variables in file paths are sanitized. You may also consider using a utility method such as org.apache.commons.io.FilenameUtils.getName(...) to only retrieve the file name from the path.\n\n**CWE**: CWE-23: Relative Path Traversal\n\n**OWASP**: A01:2021 - Broken Access Control\n\n**References**: [https://owasp.org/www-community/attacks/Path_Traversal](https://owasp.org/www-community/attacks/Path_Traversal)",
+                "markdown": "**Details**: Detected user input controlling a file path. An attacker could control the location of this file, to include going backwards in the directory with '../'. To address this, ensure that user-controlled variables in file paths are sanitized. You may also consider using a utility method such as org.apache.commons.io.FilenameUtils.getName(...) to only retrieve the file name from the path.\n\n**CWE**: CWE-23: Relative Path Traversal\n\n**OWASP**: A01:2021 - Broken Access Control\n\n**References**: [https://owasp.org/www-community/attacks/Path_Traversal](https://owasp.org/www-community/attacks/Path_Traversal)"
+              },
+              "properties": {
+                "security-severity": "7.0"
+              }
+            },
+            {
+              "id": "java.lang.security.audit.tainted-session-from-http-request.tainted-session-from-http-request",
+              "name": "Potential trust boundary violation from unvalidated HTTP request input",
+              "shortDescription": {
+                "text": "Potential trust boundary violation from unvalidated HTTP request input"
+              },
+              "fullDescription": {
+                "text": "Detected input from a HTTPServletRequest going into a session command, like `setAttribute`. User input into such a command could lead to an attacker inputting malicious code into your session parameters, blurring the line between what's trusted and untrusted, and therefore leading to a trust boundary violation. This could lead to programmers trusting unvalidated data. Instead, thoroughly sanitize user input before passing it into such function calls."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "**Details**: Detected input from a HTTPServletRequest going into a session command, like `setAttribute`. User input into such a command could lead to an attacker inputting malicious code into your session parameters, blurring the line between what's trusted and untrusted, and therefore leading to a trust boundary violation. This could lead to programmers trusting unvalidated data. Instead, thoroughly sanitize user input before passing it into such function calls.\n\n**CWE**: CWE-501: Trust Boundary Violation\n\n**OWASP**: A04:2021 - Insecure Design\n\n**References**: [https://owasp.org/Top10/A04_2021-Insecure_Design](https://owasp.org/Top10/A04_2021-Insecure_Design)",
+                "markdown": "**Details**: Detected input from a HTTPServletRequest going into a session command, like `setAttribute`. User input into such a command could lead to an attacker inputting malicious code into your session parameters, blurring the line between what's trusted and untrusted, and therefore leading to a trust boundary violation. This could lead to programmers trusting unvalidated data. Instead, thoroughly sanitize user input before passing it into such function calls.\n\n**CWE**: CWE-501: Trust Boundary Violation\n\n**OWASP**: A04:2021 - Insecure Design\n\n**References**: [https://owasp.org/Top10/A04_2021-Insecure_Design](https://owasp.org/Top10/A04_2021-Insecure_Design)"
+              },
+              "properties": {
+                "security-severity": "5.0"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "java.spring.security.injection.tainted-file-path.tainted-file-path",
+          "ruleIndex": 0,
+          "kind": "fail",
+          "message": {
+            "text": "Detected user input controlling a file path. An attacker could control the location of this file, to include going backwards in the directory with '../'. To address this, ensure that user-controlled variables in file paths are sanitized. You may also consider using a utility method such as org.apache.commons.io.FilenameUtils.getName(...) to only retrieve the file name from the path."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "3.py"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "java.lang.security.audit.tainted-session-from-http-request.tainted-session-from-http-request",
+          "ruleIndex": 1,
+          "kind": "fail",
+          "message": {
+            "text": "Detected input from a HTTPServletRequest going into a session command, like `setAttribute`. User input into such a command could lead to an attacker inputting malicious code into your session parameters, blurring the line between what's trusted and untrusted, and therefore leading to a trust boundary violation. This could lead to programmers trusting unvalidated data. Instead, thoroughly sanitize user input before passing it into such function calls."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "3.py"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
